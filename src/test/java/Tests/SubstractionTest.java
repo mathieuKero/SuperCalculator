@@ -9,15 +9,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Controllers.Addition;
+import Controllers.Substraction;
 
-public class AdditionTest {
+public class SubstractionTest {
 
-	private Addition add;
+	private Substraction sub;
 	
 	@Before
 	public void setUp() throws Exception {
-		add = new Addition();
+		sub = new Substraction();
 	}
 
 	@After
@@ -25,8 +25,8 @@ public class AdditionTest {
 	}
 
 	@Test
-	public void AdditionTwoNumbers() {
-		int result = this.add.Addition(1, 2);
+	public void SubstractionTwoNumbers() {
+		int result =  this.sub.Substraction(5, 2);
 		Assert.assertEquals(3, result);
 	}
 

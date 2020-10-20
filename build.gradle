@@ -10,6 +10,7 @@ plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java'
     id 'eclipse'
+    id 'pmd'
 }
 
 dependencies {
@@ -22,4 +23,25 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+}
+
+
+test {
+    ignoreFailures = true
+}
+
+pmd {
+    consoleOutput = true
+    toolVersion = "6.21.0"
+    rulePriority = 5
+    ignoreFailures = true
+    ruleSets = [
+      "category/java/codestyle.xml",
+      "category/java/design.xml",
+      "category/java/documentation.xml",
+      "category/java/errorprone.xml",
+      "category/java/multithreading.xml",
+      "category/java/performance.xml",
+      "category/java/security.xml",
+    ]
 }
