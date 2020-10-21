@@ -7,20 +7,33 @@ import java.util.Scanner;
 import Controllers.Addition;
 import Controllers.Substraction;
 
+
+/**
+ * Core Class which launch the SuperCalculator Application 
+ * @author Mathieu K
+ */
 public class Application {
 
 	public static Scanner scanner;
 	
+	/**
+	 * Main Methods which launche the applications
+	 * @param args Array of String
+	 */
 	public static void main(String[] args) {	
 		MainMessage();
 	}
 	
+	/**
+	 * Method which launch the Addition or Substraction, depending of the user input
+	 * @author Mathieu K
+	 */
 	public static void MainMessage() {
 		boolean continueTreatment = true;
 		
 		do{
 			
-			System.out.println("Calculatrice, sélectionnez votre menu :\n 1. Addition\n 2. Soustraction\n 3. Quitter ");
+			System.out.println("Calculatrice, sÃ©lectionnez votre menu :\n 1. Addition\n 2. Soustraction\n 3. Quitter ");
 
 			scanner = new Scanner(System.in);
 	    	String userChoice = scanner.nextLine();
@@ -49,6 +62,10 @@ public class Application {
 	}
 
 	
+	/**
+	 * Method which add two numbers and print the result to the user 
+	 * @author Mathieu K
+	 */
 	public static void AdditionMessage() {
 		System.out.println("1er nombre : ");
     	String number1 = scanner.nextLine();
@@ -67,6 +84,10 @@ public class Application {
     	System.out.println(add.Addition(nbr1, nbr2));
 	}
 	
+	/**
+	 * Method which add two numbers and print the result to the user 
+	 * @author Mathieu K
+	 */
 	public static void SubstractionMessage() {
 		System.out.println("1er nombre : ");
     	String number1 = scanner.nextLine();
