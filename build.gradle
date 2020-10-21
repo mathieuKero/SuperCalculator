@@ -11,11 +11,11 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'pmd'
+    id "com.github.spotbugs" version "4.5.1"
 }
 
 dependencies {
   testCompile 'junit:junit:4.12'
-
 }
 
 // In this section you declare where to find the dependencies of your project
@@ -45,4 +45,10 @@ pmd {
       "category/java/performance.xml",
       "category/java/security.xml",
     ]
+}
+
+spotbugs {
+    ignoreFailures = true
+    showStackTraces = true
+    showProgress = false
 }
