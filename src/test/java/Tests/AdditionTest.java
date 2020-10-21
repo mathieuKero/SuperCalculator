@@ -11,19 +11,34 @@ import org.junit.Test;
 
 import controllers.Addition;
 
+/**
+ * Addition Test Class
+ * @author Mathieu K
+ */
 public class AdditionTest {
 
 	private Addition add;
-	
+
+	/**
+	 * Before the test, we create a new addition
+	 * @exception java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		add = new Addition();
 	}
-
+	
+	/**
+	 * After the test we verify that the AdditionTwoNumbers method result has the expected type
+	 * @exception java.lang.Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * This is the test of the Addition method.
+	 */
 	@Test
 	public void AdditionTwoNumbers() {
 		double result = this.add.calculate(1, 2);

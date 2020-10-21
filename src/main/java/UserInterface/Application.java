@@ -15,17 +15,25 @@ public class Application {
 	public static String stringNumber2;
 	public static Invoker commandManager;
 	
+	/**
+	 * Main Methods which launch the applications
+	 * @param args Array of String
+	 */
 	public static void main(String[] args) {	
 		commandManager = new Invoker();
 		MainMessage();
 	}
 	
+	/**
+	 * Method which launch the Addition or Substraction, depending of the user input
+	 * @author Mathieu K
+	 */
 	public static void MainMessage() {
 		boolean continueTreatment = true;
 		
 		do{
 			
-			System.out.println("Calculatrice, sélectionnez votre menu :\n 1. Addition\n 2. Soustraction\n 3. Quitter ");
+			System.out.println("Calculatrice, sÃ©lectionnez votre menu :\n 1. Addition\n 2. Soustraction\n 3. Quitter ");
 
 			scanner = new Scanner(System.in);
 	    	String userChoice = scanner.nextLine();
@@ -54,6 +62,10 @@ public class Application {
 	}
 
 	
+	/**
+	 * Method which add two numbers and print the result to the user 
+	 * @author Mathieu K
+	 */
 	public static void addition() {
 		
     	Double doubleNumber1 = null;
@@ -73,6 +85,10 @@ public class Application {
     			commandManager.doCommand(add)));
 	}
 	
+	/**
+	 * Method which add two numbers and print the result to the user 
+	 * @author Mathieu K
+	 */
 	public static void substraction() {
 		
     	Double doubleNumber1 = null;

@@ -1,10 +1,6 @@
-package controllers;
+package Controllers;
 
-/**
- * Substraction Class
- * Allow user to substract two numbers
- * @author Mathieu K
- */
+<<<<<<< HEAD
 public class Substraction implements Command{
 	
 	/**
@@ -23,6 +19,14 @@ public class Substraction implements Command{
 	public double getNbr1() {
 		return nbr1;
 	}
+=======
+/**
+ * Substraction Class
+ * Allow user to substract two numbers
+ * @author Mathieu K
+ */
+public class Substraction {
+>>>>>>> Dev
 
 	/**
 	 * @param nbr1 the nbr1 to set
@@ -46,6 +50,7 @@ public class Substraction implements Command{
 	}
 	
 	/**
+<<<<<<< HEAD
   	 * Create a new instance of Substraction
 	 * @param nbr1 First number to substract
 	 * @param nbr2 Second number to substract
@@ -56,11 +61,15 @@ public class Substraction implements Command{
 		this.nbr2 = nbr2;
 	}
 
-	/**
-	 * Substraction Method which subtract two numbers 
-	 */ 
 	@Override
 	public double calculate() {
+=======
+	 * Substraction Method which subtract two numbers 
+	 * @param nbr1 Double value
+	 * @param nbr2 Double value
+	 */
+	public double calculate(Double nbr1, Double nbr2) {
+>>>>>>> Dev
 		return nbr1 - nbr2;
 	}
 

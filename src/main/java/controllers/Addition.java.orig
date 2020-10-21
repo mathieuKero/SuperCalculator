@@ -59,6 +59,8 @@ public class Addition implements Command{
 
 	/**
 	 * Addition Method which addition two numbers 
+	 * @param a Double value
+	 * @param b Double value
 	 */
 	@Override
 	public double calculate() {
