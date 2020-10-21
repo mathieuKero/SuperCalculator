@@ -2,7 +2,7 @@ package Controllers;
 
 public class Substraction {
 
-	public int Substraction(int a, int b) {
-		return a - b;
+	public double Substraction(Double nbr1, Double nbr2) {
+		return nbr1 - nbr2;
 	}
 }

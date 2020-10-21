@@ -2,7 +2,7 @@ package Controllers;
 
 public class Addition{
 	
-	public int Addition(int a, int b) {
+	public double Addition(double a, double b) {
 		return a + b;
 	}
 

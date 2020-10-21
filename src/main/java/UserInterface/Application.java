@@ -4,14 +4,15 @@ import java.io.Console;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
+import Controllers.Addition;
+import Controllers.Substraction;
+
 public class Application {
 
-	public static void main(String[] args) {
-		
+	public static Scanner scanner;
+	
+	public static void main(String[] args) {	
 		MainMessage();
-		
-		
-		
 	}
 	
 	public static void MainMessage() {
@@ -19,22 +20,26 @@ public class Application {
 		
 		do{
 			
-			System.out.println("Calculatrice, sélectionnez votre menu :\n 1. Addition\n 2. Soustraction ");
+			System.out.println("Calculatrice, sélectionnez votre menu :\n 1. Addition\n 2. Soustraction\n 3. Quitter ");
 
-	        Scanner in = new Scanner(System.in);
-	    	String userChoice = in.nextLine();
+			scanner = new Scanner(System.in);
+	    	String userChoice = scanner.nextLine();
 	    	
 		    try {
 		    	int userChoiceInt = Integer.parseInt(userChoice);
 		        
 		        switch(userChoiceInt) {
-		        	case 1: 
-				        continueTreatment = false;
+		        	case 1:
+				        AdditionMessage();
 		        		break;
 		        		
 		        	case 2:
-				        continueTreatment = false;
+				        
+				        SubstractionMessage();
 		        		break;
+		        	
+		        	case 3 :
+		        		continueTreatment = false;
 		        		
 		        	default:
 		        }
@@ -43,4 +48,40 @@ public class Application {
 		}while(continueTreatment);
 	}
 
+	
+	public static void AdditionMessage() {
+		System.out.println("1er nombre : ");
+    	String number1 = scanner.nextLine();
+		System.out.println("2eme nombre : ");
+    	String number2 = scanner.nextLine();
+    	
+    	Double nbr1 = null;
+    	Double nbr2 = null;
+    	
+    	try {
+    		nbr1 = Double.parseDouble(number1);
+    		nbr2 = Double.parseDouble(number2);
+	    } catch (NumberFormatException nfe) {}
+    	
+    	Addition add = new Addition();
+    	System.out.println(add.Addition(nbr1, nbr2));
+	}
+	
+	public static void SubstractionMessage() {
+		System.out.println("1er nombre : ");
+    	String number1 = scanner.nextLine();
+		System.out.println("2eme nombre : ");
+    	String number2 = scanner.nextLine();
+    	
+    	Double nbr1 = null;
+    	Double nbr2 = null;
+    	
+    	try {
+    		nbr1 = Double.parseDouble(number1);
+    		nbr2 = Double.parseDouble(number2);
+	    } catch (NumberFormatException nfe) {}
+    	
+    	Substraction sub = new Substraction();
+    	System.out.println(sub.Substraction(nbr1, nbr2));
+	}
 }

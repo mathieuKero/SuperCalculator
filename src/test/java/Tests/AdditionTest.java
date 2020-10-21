@@ -26,8 +26,8 @@ public class AdditionTest {
 
 	@Test
 	public void AdditionTwoNumbers() {
-		int result = this.add.Addition(1, 2);
-		Assert.assertEquals(3, result);
+		double result = this.add.Addition(1, 2);
+		Assert.assertEquals(3, result, 0.0001);
 	}
 
 }
