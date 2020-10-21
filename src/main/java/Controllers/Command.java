@@ -1,13 +1,10 @@
-package Controllers;
+package controllers;
 
 public interface Command {
 
-	//public void DoJob() {
-		
-	//}
 	
-	static void DoCommand() {
-		
+	static void doCommand() {
+
 	}
 	
 	static void revert() {
