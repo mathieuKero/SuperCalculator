@@ -13,7 +13,6 @@ public class Addition implements Command{
 	private double nbr1;
 	
 	/**
-<<<<<<< HEAD
 	 * Second number to add
 	 */
 	private double nbr2;

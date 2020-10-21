@@ -25,7 +25,7 @@ public class SubstractionTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		sub = new Substraction();
+		sub = new Substraction(5.5, 5.5);
 	}
 
 	/**
@@ -41,8 +41,8 @@ public class SubstractionTest {
 	 */
 	@Test
 	public void SubstractionTwoNumbers() {
-		double result =  this.sub.calculate(5.2, 2.1);
-		Assert.assertEquals(3.1, result, 0.0001);
+		double result =  this.sub.calculate();
+		Assert.assertEquals(0, result, 0.0001);
 	}
 
 }

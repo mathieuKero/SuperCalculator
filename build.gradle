@@ -12,6 +12,8 @@ plugins {
     id 'eclipse'
     id 'pmd'
     id "com.github.spotbugs" version "4.5.1"
+    id 'de.aaschmid.cpd' version '3.1'
+    
 }
 
 dependencies {
@@ -24,7 +26,6 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
-
 
 test {
     ignoreFailures = true
@@ -51,4 +52,9 @@ spotbugs {
     ignoreFailures = true
     showStackTraces = true
     showProgress = false
+}
+
+cpd {
+    minimumTokenCount = 10
+    ignoreLiterals = false
 }
