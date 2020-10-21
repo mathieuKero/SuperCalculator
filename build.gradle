@@ -35,7 +35,6 @@ pmd {
     toolVersion = "6.21.0"
     rulePriority = 5
     ignoreFailures = true
-    ruleSetFiles = files("custom-pmd-ruleset.xml")
     ruleSets = [
       "category/java/codestyle.xml",
       "category/java/design.xml",
