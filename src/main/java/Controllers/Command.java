@@ -2,12 +2,7 @@ package controllers;
 
 public interface Command {
 
+	double calculate();
 	
-	static void doCommand() {
-
-	}
-	
-	static void revert() {
-		
-	}
+	void revert();
 }

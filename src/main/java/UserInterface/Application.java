@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import controllers.Addition;
+import controllers.Invoker;
 import controllers.Substraction;
 
 public class Application {
@@ -12,8 +13,10 @@ public class Application {
 	public static Scanner scanner;
 	public static String stringNumber1;
 	public static String stringNumber2;
+	public static Invoker commandManager;
 	
 	public static void main(String[] args) {	
+		commandManager = new Invoker();
 		MainMessage();
 	}
 	
@@ -63,8 +66,11 @@ public class Application {
     		doubleNumber2 = Double.parseDouble(stringNumber2);
 	    } catch (NumberFormatException nfe) {}
     	
-    	Addition add = new Addition();
-    	System.out.println(String.format("%s + %s = %s", doubleNumber1, doubleNumber2, add.calculate(doubleNumber1, doubleNumber2)));
+    	Addition add = new Addition(doubleNumber1, doubleNumber2);
+    	System.out.println(String.format("%s + %s = %s", 
+    			doubleNumber1, 
+    			doubleNumber2, 
+    			commandManager.doCommand(add)));
 	}
 	
 	public static void substraction() {
@@ -79,8 +85,11 @@ public class Application {
     		doubleNumber2 = Double.parseDouble(stringNumber2);
 	    } catch (NumberFormatException nfe) {}
     	
-    	Substraction sub = new Substraction();
-    	System.out.println(String.format("%s + %s = %s", doubleNumber1, doubleNumber2, sub.calculate(doubleNumber1, doubleNumber2)));
+    	Substraction sub = new Substraction(doubleNumber1, doubleNumber2);
+    	System.out.println(String.format("%s + %s = %s", 
+    			doubleNumber1, 
+    			doubleNumber2, 
+    			commandManager.doCommand(sub)));
 	}
 	
 	public static void displayCalculMessage() {
