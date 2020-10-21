@@ -51,10 +51,11 @@ Pour changer de branche et publier sur les branches correspondantes
 > git checkout [nom de branche]
 
 Il existe différentes branches :
-* Mathieu
-* Damien
-* Sofiane
-* Master
+* Branches de dév indépendantes
+  * Damien
+  * Sofiane 
+  * Mathieu
+* Dev => Branche de dév
 
 Une fois votre branche sélectionnée, pushez vos modifications sur le répertoire correspondant
 
