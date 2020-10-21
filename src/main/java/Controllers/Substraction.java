@@ -14,7 +14,7 @@ public class Substraction {
 	 * @param nbr1 Double value
 	 * @param nbr2 Double value
 	 */
-	public double Substraction(Double nbr1, Double nbr2) {
+	public double calculate(Double nbr1, Double nbr2) {
 		return nbr1 - nbr2;
 	}
 }

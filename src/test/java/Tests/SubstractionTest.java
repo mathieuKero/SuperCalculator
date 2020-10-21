@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Controllers.Substraction;
+import controllers.Substraction;
 
 /**
  * Addition Test Class
@@ -41,7 +41,7 @@ public class SubstractionTest {
 	 */
 	@Test
 	public void SubstractionTwoNumbers() {
-		double result =  this.sub.Substraction(5.2, 2.1);
+		double result =  this.sub.calculate(5.2, 2.1);
 		Assert.assertEquals(3.1, result, 0.0001);
 	}
 

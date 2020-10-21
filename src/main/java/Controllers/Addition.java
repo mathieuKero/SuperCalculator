@@ -1,4 +1,4 @@
-package Controllers;
+package controllers;
 
 /**
  * Addition Class
@@ -14,7 +14,7 @@ public class Addition{
 	 * @param a Double value
 	 * @param b Double value
 	 */
-	public double Addition(double a, double b) {
-		return a + b;
+	public double calculate(final double nbr1, final double nbr2) {
+		return nbr1 + nbr2;
 	}
 }
