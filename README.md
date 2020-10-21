@@ -51,7 +51,7 @@ Pour changer de branche et publier sur les branches correspondantes
 > git checkout [nom de branche]
 
 Il existe différentes branches :
-* Branches de dév indépendantesMathieu
+* Branches de dév indépendantes
   * Damien
   * Sofiane 
   * Mathieu
