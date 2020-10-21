@@ -26,8 +26,8 @@ public class SubstractionTest {
 
 	@Test
 	public void SubstractionTwoNumbers() {
-		double result =  this.sub.Substraction(5.2, 2.4);
-		Assert.assertEquals(3, result, 0.0001);
+		double result =  this.sub.Substraction(5.2, 2.1);
+		Assert.assertEquals(3.1, result, 0.0001);
 	}
 
 }

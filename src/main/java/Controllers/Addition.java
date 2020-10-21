@@ -2,6 +2,8 @@ package Controllers;
 
 public class Addition{
 	
+	public Addition() {}
+	
 	public double Addition(double a, double b) {
 		return a + b;
 	}
