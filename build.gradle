@@ -50,11 +50,11 @@ pmd {
 
 spotbugs {
     ignoreFailures = true
-    showStackTraces = true
     showProgress = false
 }
 
 cpd {
+    ignoreFailures = true
     minimumTokenCount = 10
     ignoreLiterals = false
 }
