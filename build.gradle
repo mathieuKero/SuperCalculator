@@ -32,14 +32,8 @@ test {
     ignoreFailures = true
 }
 
-task checkstyle(type: Checkstyle) {
-    configFile rootProject.file('checkstyle.xml')
-    source 'src/main/java'
-    ignoreFailures true
-    showViolations true
-    include '**/*.java'
-
-    classpath = files()
+checkstyle {
+    ignoreFailures = true
 }
 
 pmd {
