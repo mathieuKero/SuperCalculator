@@ -35,7 +35,7 @@ public class Application {
 		
 		do{
 			
-			System.out.println("Calculatrice, sÃ©lectionnez votre menu :\n 1. Addition\n 2. Soustraction\n 3. Multiplication\n 4. division\n 5. Quitter ");
+			System.out.println("Calculatrice, sélectionnez votre action :\n 1. Addition\n 2. Soustraction\n 3. Multiplication\n 4. Division\n 5. Quitter ");
 
 			scanner = new Scanner(System.in);
 	    	String userChoice = scanner.nextLine();
@@ -177,9 +177,9 @@ public class Application {
 	}
 	
 	public static void displayCalculMessage() {
-		System.out.println("1er nombre : ");
+		System.out.println("1er valeur : ");
 		stringNumber1 = scanner.nextLine();
-		System.out.println("2eme nombre : ");
+		System.out.println("2eme valeur : ");
 		stringNumber2 = scanner.nextLine();
 	}
 }
