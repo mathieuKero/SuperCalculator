@@ -1,3 +1,4 @@
+// CPD-Ignore-On
 package tests;
 
 import static org.junit.Assert.*;
@@ -46,4 +47,6 @@ public class MultiplyTest {
 		Assert.assertEquals(50, multi.getResult(), 0.0001);
 	}
 
-}
+} 	
+
+//CPD-Ignore-Off

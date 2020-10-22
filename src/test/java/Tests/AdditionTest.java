@@ -1,3 +1,4 @@
+// CPD-Ignore-On
 package tests;
 
 import static org.junit.Assert.*;
@@ -46,3 +47,5 @@ public class AdditionTest {
 	}
 
 }
+
+//CPD-Ignore-Off

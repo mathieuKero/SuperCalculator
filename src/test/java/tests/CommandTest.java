@@ -1,3 +1,4 @@
+// CPD-Ignore-On
 package tests;
 
 import static org.junit.Assert.*;
@@ -24,3 +25,5 @@ public class CommandTest {
 	}
 
 }
+
+//CPD-Ignore-Off
