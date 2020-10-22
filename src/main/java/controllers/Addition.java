@@ -6,22 +6,22 @@ package controllers;
  * @author Mathieu K
  */
 public class Addition implements Command{
-	
+
 	/**
 	 * First number to add
 	 */
 	private double nbr1;
-	
+
 	/**
 	 * Second number to add
 	 */
 	private double nbr2;
-	
+
 	/**
-	 * Result of the calcul
+	 * Result of the calculation
 	 */
 	private double result;
-	
+
 	/**
 	 * @return the result
 	 */
@@ -63,7 +63,7 @@ public class Addition implements Command{
 	public void setNbr2(double nbr2) {
 		this.nbr2 = nbr2;
 	}
-	
+
 	/**
 	 * Create a new instance of Addition
 	 * @param nbr1 First number to add
@@ -83,12 +83,12 @@ public class Addition implements Command{
 	public void calculate() {
 		result = nbr1 + nbr2;
 	}
-	
+
 	@Override
 	public void revert() {
 		// TODO Auto-generated method stub
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("%s + %s = %s", nbr1, nbr2, result);

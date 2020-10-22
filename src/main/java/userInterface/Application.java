@@ -18,12 +18,11 @@ public class Application {
 	public static String stringNumber1;
 	public static String stringNumber2;
 	public static Invoker commandManager;
-		
+
 	/**
 	 * Default Constructor
 	 */
 	public Application() { /* Empty constructor */ }
-	
 	/**
 	 * Main Methods which launch the applications
 	 * @param args Array of String
@@ -43,7 +42,7 @@ public class Application {
 		
 		do{
 			
-			System.out.println("Calculatrice, sélectionnez votre action :"
+			System.out.println("Calculatrice, sï¿½lectionnez votre action :"
 					+ "\n 1. Addition"
 					+ "\n 2. Soustraction"
 					+ "\n 3. Multiplication"
