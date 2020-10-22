@@ -42,8 +42,8 @@ public class MultiplyTest {
 	 */
 	@Test
 	public void MultiplyTwoNumbers() {
-		double result = this.multi.calculate();
-		Assert.assertEquals(50, result, 0.0001);
+		this.multi.calculate();
+		Assert.assertEquals(50, multi.getResult(), 0.0001);
 	}
 
 }

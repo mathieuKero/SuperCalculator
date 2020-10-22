@@ -18,6 +18,25 @@ public class Substraction implements Command{
 	private double nbr2;
 	
 	/**
+	 * Result of the calcul
+	 */
+	private double result;
+	
+	/**
+	 * @return the result
+	 */
+	public double getResult() {
+		return result;
+	}
+
+	/**
+	 * @param result the result to set
+	 */
+	public void setResult(double result) {
+		this.result = result;
+	}
+	
+	/**
 	 * @return the nbr1
 	 */
 	public double getNbr1() {
@@ -60,13 +79,18 @@ public class Substraction implements Command{
 	 * Substraction Method which subtract two numbers 
 	 */ 
 	@Override
-	public double calculate() {
-		return nbr1 - nbr2;
+	public void calculate() {
+		result = nbr1 - nbr2;
 	}
 
 	@Override
 	public void revert() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s - %s = %s", nbr1, nbr2, result);
 	}
 }

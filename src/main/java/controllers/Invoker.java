@@ -1,11 +1,21 @@
 package controllers;
 
+import java.util.ArrayList;
+
 public class Invoker {
  
-	public double doCommand(Command command) {
-		return command.calculate();
+	private ArrayList<Command> listCommands;
+	
+	public Invoker() {
+		listCommands = new ArrayList<Command>();
 	}
 	
-	//TODO générer une méthode d'affichage d'historique
-}
+	public void doCommand(Command command) {
+		command.calculate();
+		listCommands.add(command);
+	}
 
+	public ArrayList<Command> getHitsoric(){
+		return this.listCommands;
+	}
+}

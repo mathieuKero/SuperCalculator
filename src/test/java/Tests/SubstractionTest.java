@@ -41,8 +41,8 @@ public class SubstractionTest {
 	 */
 	@Test
 	public void SubstractionTwoNumbers() {
-		double result =  this.sub.calculate();
-		Assert.assertEquals(0, result, 0.0001);
+		this.sub.calculate();
+		Assert.assertEquals(0, sub.getResult(), 0.0001);
 	}
 
 }

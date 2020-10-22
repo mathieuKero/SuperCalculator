@@ -41,8 +41,8 @@ public class AdditionTest {
 	 */
 	@Test
 	public void AdditionTwoNumbers() {
-		double result = this.add.calculate();
-		Assert.assertEquals(11, result, 0.0001);
+		this.add.calculate();
+		Assert.assertEquals(11, add.getResult(), 0.0001);
 	}
 
 }

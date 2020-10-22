@@ -42,15 +42,15 @@ public class DivideTest {
 	@Test
 	public void DivideTwoNumbers() {
 		div = new Divide(12, 3);
-		double result = this.div.calculate();
-		Assert.assertEquals(4, result, 0.0001);
+		this.div.calculate();
+		Assert.assertEquals(4, div.getResult(), 0.0001);
 	}
 	
 	@Test
 	public void DivideTwoNumbersWithZero() {
 		div = new Divide(12, 0);
-		double result = this.div.calculate();
-		Assert.assertEquals(0, result, 0.0001);
+		this.div.calculate();
+		Assert.assertEquals(0, div.getResult(), 0.0001);
 	}
 
 }
