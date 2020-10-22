@@ -1,4 +1,4 @@
-// CPD-Ignore-On
+
 package tests;
 
 import static org.junit.Assert.*;
@@ -17,6 +17,7 @@ import controllers.Divide;
  * Addition Test Class
  * @author Mathieu K
  */
+@SuppressWarnings("CPD-START")
 public class DivideTest {
 
 	private Divide div;
@@ -55,5 +56,3 @@ public class DivideTest {
 	}
 
 }
-
-//CPD-Ignore-Off

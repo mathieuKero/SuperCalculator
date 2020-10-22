@@ -1,4 +1,3 @@
-// CPD-Ignore-On
 package tests;
 
 import static org.junit.Assert.*;
@@ -17,6 +16,7 @@ import controllers.Multiply;
  * Addition Test Class
  * @author Mathieu K
  */
+@SuppressWarnings("CPD-START")
 public class MultiplyTest {
 
 	private Multiply multi;
@@ -49,4 +49,3 @@ public class MultiplyTest {
 
 } 	
 
-//CPD-Ignore-Off

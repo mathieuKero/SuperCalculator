@@ -1,4 +1,4 @@
-// CPD-Ignore-On
+
 package tests;
 
 import static org.junit.Assert.*;
@@ -16,6 +16,7 @@ import controllers.Substraction;
  * Addition Test Class
  * @author Mathieu K
  */
+@SuppressWarnings("CPD-START")
 public class SubstractionTest {
 
 	private Substraction sub;
@@ -47,5 +48,3 @@ public class SubstractionTest {
 	}
 
 }
-
-//CPD-Ignore-Off
