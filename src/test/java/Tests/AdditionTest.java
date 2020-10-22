@@ -1,3 +1,4 @@
+
 package tests;
 
 import static org.junit.Assert.*;
@@ -15,6 +16,7 @@ import controllers.Addition;
  * Addition Test Class
  * @author Mathieu K
  */
+@SuppressWarnings("CPD-START")
 public class AdditionTest {
 
 	private Addition add;
@@ -46,3 +48,4 @@ public class AdditionTest {
 	}
 
 }
+

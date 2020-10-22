@@ -16,6 +16,7 @@ import controllers.Multiply;
  * Addition Test Class
  * @author Mathieu K
  */
+@SuppressWarnings("CPD-START")
 public class MultiplyTest {
 
 	private Multiply multi;
@@ -46,4 +47,5 @@ public class MultiplyTest {
 		Assert.assertEquals(50, multi.getResult(), 0.0001);
 	}
 
-}
+} 	
+
