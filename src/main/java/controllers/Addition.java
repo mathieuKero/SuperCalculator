@@ -18,6 +18,25 @@ public class Addition implements Command{
 	private double nbr2;
 	
 	/**
+	 * Result of the calcul
+	 */
+	private double result;
+	
+	/**
+	 * @return the result
+	 */
+	public double getResult() {
+		return result;
+	}
+
+	/**
+	 * @param result the result to set
+	 */
+	public void setResult(double result) {
+		this.result = result;
+	}
+
+	/**
 	 * @return the nbr1
 	 */
 	public double getNbr1() {
@@ -54,18 +73,24 @@ public class Addition implements Command{
 		super();
 		this.nbr1 = nbr1;
 		this.nbr2 = nbr2;
+		this.result = 0;
 	}
 
 	/**
 	 * Addition Method which addition two numbers 
 	 */
 	@Override
-	public double calculate() {
-		return nbr1 + nbr2;
+	public void calculate() {
+		result = nbr1 + nbr2;
 	}
 	
 	@Override
 	public void revert() {
 		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s + %s = %s", nbr1, nbr2, result);
 	}
 }
