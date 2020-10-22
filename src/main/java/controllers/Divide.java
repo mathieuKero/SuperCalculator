@@ -25,6 +25,25 @@ public class Divide implements Command{
 	}
 
 	/**
+	 * Result of the calcul
+	 */
+	private double result;
+	
+	/**
+	 * @return the result
+	 */
+	public double getResult() {
+		return result;
+	}
+
+	/**
+	 * @param result the result to set
+	 */
+	public void setResult(double result) {
+		this.result = result;
+	}
+	
+	/**
 	 * @param nbr1 the nbr1 to set
 	 */
 	public void setNbr1(double nbr1) {
@@ -60,18 +79,20 @@ public class Divide implements Command{
 	 * Addition Method which division two numbers 
 	 */
 	@Override
-	public double calculate() {
-		double tmpResult = 0;
+	public void calculate() {
+		result = 0;
 		if(nbr2 != 0) {
-			tmpResult = nbr1 / nbr2;
+			result = nbr1 / nbr2;
 		}
-		return tmpResult;
 	}
 
 	@Override
 	public void revert() {
 		// TODO Auto-generated method stub
-		
 	}
-
+	
+	@Override
+	public String toString() {
+		return String.format("%s / %s = %s", nbr1, nbr2, result);
+	}
 }

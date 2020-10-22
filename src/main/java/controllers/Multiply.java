@@ -17,6 +17,24 @@ public class Multiply implements Command{
 	 */
 	private double nbr2;
 
+	/**
+	 * Result of the calcul
+	 */
+	private double result;
+	
+	/**
+	 * @return the result
+	 */
+	public double getResult() {
+		return result;
+	}
+
+	/**
+	 * @param result the result to set
+	 */
+	public void setResult(double result) {
+		this.result = result;
+	}
 	
 	/**
 	 * @return the nbr1
@@ -65,8 +83,8 @@ public class Multiply implements Command{
 	 * Multiply Method which multiply two numbers 
 	 */
 	@Override
-	public double calculate() {
-		return nbr1 * nbr2;
+	public void calculate() {
+		result = nbr1 * nbr2;
 	}
 
 	@Override
@@ -75,5 +93,8 @@ public class Multiply implements Command{
 		
 	}
 	
-	
+	@Override
+	public String toString() {
+		return String.format("%s * %s = %s", nbr1, nbr2, result);
+	}	
 }

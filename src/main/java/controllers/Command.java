@@ -2,7 +2,9 @@ package controllers;
 
 public interface Command {
 
-	double calculate();
+	void calculate();
 	
 	void revert();
+	
+	String toString();
 }
