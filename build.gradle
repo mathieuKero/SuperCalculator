@@ -11,6 +11,7 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'pmd'
+    id 'checkstyle'
     id "com.github.spotbugs" version "4.5.1"
 }
 
@@ -28,6 +29,16 @@ repositories {
 
 test {
     ignoreFailures = true
+}
+
+task checkstyle(type: Checkstyle) {
+    configFile rootProject.file('checkstyle.xml')
+    source 'src/main/java'
+    ignoreFailures true
+    showViolations true
+    include '**/*.java'
+
+    classpath = files()
 }
 
 pmd {
