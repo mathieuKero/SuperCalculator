@@ -5,7 +5,9 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import controllers.Addition;
+import controllers.Divide;
 import controllers.Invoker;
+import controllers.Multiply;
 import controllers.Substraction;
 
 public class Application {
@@ -33,7 +35,7 @@ public class Application {
 		
 		do{
 			
-			System.out.println("Calculatrice, sÃ©lectionnez votre menu :\n 1. Addition\n 2. Soustraction\n 3. Quitter ");
+			System.out.println("Calculatrice, sélectionnez votre action :\n 1. Addition\n 2. Soustraction\n 3. Multiplication\n 4. Division\n 5. Quitter ");
 
 			scanner = new Scanner(System.in);
 	    	String userChoice = scanner.nextLine();
@@ -46,15 +48,23 @@ public class Application {
 				        addition();
 		        		break;
 		        		
-		        	case 2:
-				        
+					case 2:			        
 				        substraction();
 		        		break;
-		        	
-		        	case 3 :
+		        		
+					case 3:		    
+					    multiply();
+						break;
+						
+					case 4:
+					    divide();
+						break;
+						        	
+		        	case 5 :
 		        		continueTreatment = false;
 		        		
 		        	default:
+		        		break;
 		        }
 		    } catch (NumberFormatException nfe) {}
 		    
@@ -76,13 +86,17 @@ public class Application {
     	try {
     		doubleNumber1 = Double.parseDouble(stringNumber1);
     		doubleNumber2 = Double.parseDouble(stringNumber2);
-	    } catch (NumberFormatException nfe) {}
+    		
+        	Addition add = new Addition(doubleNumber1, doubleNumber2);
+        	System.out.println(String.format("%s + %s = %s", 
+        			doubleNumber1, 
+        			doubleNumber2, 
+        			commandManager.doCommand(add)));
+	    } catch (NumberFormatException nfe) {
+	    	System.out.println("Merci de renseigner des nombres valides");
+	    }
     	
-    	Addition add = new Addition(doubleNumber1, doubleNumber2);
-    	System.out.println(String.format("%s + %s = %s", 
-    			doubleNumber1, 
-    			doubleNumber2, 
-    			commandManager.doCommand(add)));
+
 	}
 	
 	/**
@@ -99,19 +113,73 @@ public class Application {
     	try {
     		doubleNumber1 = Double.parseDouble(stringNumber1);
     		doubleNumber2 = Double.parseDouble(stringNumber2);
-	    } catch (NumberFormatException nfe) {}
+    		
+        	Substraction sub = new Substraction(doubleNumber1, doubleNumber2);
+        	System.out.println(String.format("%s - %s = %s", 
+        			doubleNumber1, 
+        			doubleNumber2, 
+        			commandManager.doCommand(sub)));
+	    } catch (NumberFormatException nfe) {
+	    	System.out.println("Merci de renseigner des nombres valides");
+	    }
     	
-    	Substraction sub = new Substraction(doubleNumber1, doubleNumber2);
-    	System.out.println(String.format("%s + %s = %s", 
-    			doubleNumber1, 
-    			doubleNumber2, 
-    			commandManager.doCommand(sub)));
+
+	}
+	
+	/**
+	 * Method which multiply two numbers and print the result to the user 
+	 * @author Mathieu K
+	 */
+	public static void multiply() {
+		
+    	Double doubleNumber1 = null;
+    	Double doubleNumber2 = null;
+    	
+    	displayCalculMessage();
+    	
+    	try {
+    		doubleNumber1 = Double.parseDouble(stringNumber1);
+    		doubleNumber2 = Double.parseDouble(stringNumber2);
+    		
+    		Multiply div = new Multiply(doubleNumber1, doubleNumber2);
+        	System.out.println(String.format("%s * %s = %s", 
+        			doubleNumber1, 
+        			doubleNumber2, 
+        			commandManager.doCommand(div)));
+	    } catch (NumberFormatException nfe) {
+	    	System.out.println("Merci de renseigner des nombres valides");
+	    }   	
+	}
+	
+	/**
+	 * Method which divide two numbers and print the result to the user 
+	 * @author Mathieu K
+	 */
+	public static void divide() {
+		
+    	Double doubleNumber1 = null;
+    	Double doubleNumber2 = null;
+    	
+    	displayCalculMessage();
+    	
+    	try {
+    		doubleNumber1 = Double.parseDouble(stringNumber1);
+    		doubleNumber2 = Double.parseDouble(stringNumber2);
+    		
+        	Divide div = new Divide(doubleNumber1, doubleNumber2);
+        	System.out.println(String.format("%s / %s = %s", 
+        			doubleNumber1, 
+        			doubleNumber2, 
+        			commandManager.doCommand(div)));
+	    } catch (NumberFormatException nfe) {
+	    	System.out.println("Merci de renseigner des nombres valides");
+	    }
 	}
 	
 	public static void displayCalculMessage() {
-		System.out.println("1er nombre : ");
+		System.out.println("1er valeur : ");
 		stringNumber1 = scanner.nextLine();
-		System.out.println("2eme nombre : ");
+		System.out.println("2eme valeur : ");
 		stringNumber2 = scanner.nextLine();
 	}
 }
