@@ -52,6 +52,7 @@ task archiveDoc(type: Zip) {
 
 checkstyle {
     ignoreFailures = true
+    checkstyleTest.enabled = false
 }
 
 jacoco {
@@ -110,6 +111,10 @@ pmd {
 spotbugs {
     ignoreFailures = true
     showProgress = false
+}
+
+spotbugsTest {
+    enabled = false
 }
 
 cpd {
