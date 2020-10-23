@@ -10,6 +10,7 @@ import controllers.Addition;
 import controllers.Command;
 import controllers.Divide;
 import controllers.Invoker;
+import controllers.Modulo;
 import controllers.Multiply;
 import controllers.Square;
 import controllers.SquareOut;
@@ -93,10 +94,10 @@ public class Application {
 			
 			Boolean toProcess = true;
 			final String userText = scanner.nextLine();
-	        if(userText.matches("^(\\d*|MEMO|memo)([\\/\\+\\*\\-\\^]|sqrt)(\\d*|MEMO|memo)$")) {
+	        if(userText.matches("^(\\d*|MEMO|memo)([\\/\\+\\*\\-\\^\\%]|sqrt)(\\d*|MEMO|memo)$")) {
 	        	        	
 	        	 
-            	pattern = Pattern.compile("([\\/\\+\\*\\-\\^]|sqrt)");
+            	pattern = Pattern.compile("([\\/\\+\\*\\-\\^\\%]|sqrt)");
             	matcher = pattern.matcher(userText);
             	if(matcher.find()) {
             		operator = matcher.group(0);
@@ -156,6 +157,9 @@ public class Application {
 	    	    			break;
 	    	    		case "sqrt":
 	    	    			squareOut();
+	    	    			break;
+	    	    		case "%":
+	    	    			modulo();
 	    	    			break;
 			        		
 			        	default:
@@ -294,10 +298,23 @@ public class Application {
 				System.out.println(sqrOut.toString());
 			}
 		}
+	}
+	
+	/**
+	 * Method witch square the first number depends on the second
+	 * @author Mathieu K
+	 */
+	public void modulo() {
+		Modulo mod;
 		
+		if(nbr1ToOperate == 0) {
+			mod = new Modulo(commandManager.getValueFromPreviousCommand());	
+		}else {
+			mod = new Modulo(nbr1ToOperate);
+		}
 		
-			
-		
+		commandManager.doCommand(mod, nbr2ToOperate);
+		System.out.println(mod.toString());
 	}
 	
 	/**

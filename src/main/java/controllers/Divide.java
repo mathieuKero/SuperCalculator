@@ -23,6 +23,12 @@ public class Divide implements Command{
 
     
     /**
+     * Origin value to display
+     */
+    private transient double displayedValue;
+    
+    
+    /**
 	 * @return the value
 	 */
     @Override
@@ -32,6 +38,7 @@ public class Divide implements Command{
 
 	@Override
     public double redo(final double addValue) {
+		this.displayedValue = this.value;
         this.divValue = addValue;
 
         if(this.divValue == 0) {
@@ -45,6 +52,6 @@ public class Divide implements Command{
 	
 	@Override
 	public String toString() {
-		return String.format("%s / %s = %s", value - divValue , divValue, value);
+		return String.format("%s / %s = %s", displayedValue , divValue, value);
 	}
 }

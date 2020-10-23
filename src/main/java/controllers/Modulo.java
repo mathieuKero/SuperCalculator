@@ -23,6 +23,12 @@ public class Modulo implements Command{
     }
     
     /**
+     * Origin value to display
+     */
+    private transient double displayedValue;
+    
+    
+    /**
 	 * @return the value
 	 */
     @Override
@@ -32,14 +38,15 @@ public class Modulo implements Command{
 
 	@Override
     public double redo(final double modValue) {
+		this.displayedValue = this.value;
         this.modValue = modValue;
 
-        this.value %= this.modValue;
+        this.value = this.value % this.modValue;
         return this.value;
     }
 	
 	@Override
 	public String toString() {
-		return String.format("%s % %s = %s", value - modValue , modValue, value);
+		return String.format("%s %% %s = %s", displayedValue , modValue, value);
 	}
 }

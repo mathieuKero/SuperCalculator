@@ -20,6 +20,12 @@ public class Multiply implements Command{
     public Multiply(final double doubleNumber) {
         this.value = doubleNumber;
     }
+    
+    /**
+     * Origin value to display
+     */
+    private transient double displayedValue;
+    
     /**
    	 * @return the value
    	 */
@@ -30,14 +36,15 @@ public class Multiply implements Command{
 
    	@Override
    public double redo(final double addValue) {
-       this.mulValue = addValue;
+   		this.displayedValue = this.value;
+   		this.mulValue = addValue;
 
-       this.value *= this.mulValue;
-       return this.value;
+   		this.value *= this.mulValue;
+   		return this.value;
    }
    	
    	@Override
    	public String toString() {
-   		return String.format("%s * %s = %s", value - mulValue , mulValue, value);
+   		return String.format("%s * %s = %s", displayedValue , mulValue, value);
    	}
 }

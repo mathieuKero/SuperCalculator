@@ -39,6 +39,6 @@ public class Substraction implements Command{
 	
 	@Override
 	public String toString() {
-		return String.format("%s - %s = %s", value - subValue , subValue, value);
+		return String.format("%s - %s = %s", value + subValue , subValue, value);
 	}
 }
