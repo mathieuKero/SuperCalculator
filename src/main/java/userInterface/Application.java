@@ -11,6 +11,8 @@ import controllers.Command;
 import controllers.Divide;
 import controllers.Invoker;
 import controllers.Multiply;
+import controllers.Square;
+import controllers.SquareOut;
 import controllers.Substraction;
 
 /**
@@ -93,6 +95,13 @@ public class Application {
 			final String userText = scanner.nextLine();
 	        if(userText.matches("^(\\d*|MEMO|memo)([\\/\\+\\*\\-\\^]|sqrt)(\\d*|MEMO|memo)$")) {
 	        	        	
+	        	 
+            	pattern = Pattern.compile("([\\/\\+\\*\\-\\^]|sqrt)");
+            	matcher = pattern.matcher(userText);
+            	if(matcher.find()) {
+            		operator = matcher.group(0);
+            	}
+	        	
 	        	pattern = Pattern.compile("^(\\d+|MEMO|memo)");
 	        	matcher = pattern.matcher(userText);
 	        	if(matcher.find()) {
@@ -104,8 +113,13 @@ public class Application {
 	        		}
 	        	}else {
 	        		if(commandManager.checkHistoryNotNull()) {
-	        			System.out.println("Vous n'avez pas d'historique de calcul");
-	        			toProcess = false;
+	        			if(operator.equals("sqrt") || operator.equals("SQRT")) {
+		        			toProcess = true;
+	        			}else {
+	        				System.out.println("Vous n'avez pas d'historique de calcul");
+		        			toProcess = false;
+	        			}
+	        			
 	        		}else {
 	        			nbr1ToOperate = 0;
 	        		}
@@ -122,36 +136,32 @@ public class Application {
 			        	    nbr2ToOperate = Double.parseDouble(matcher.group(0));
 		        		}
 		        	}
-	        	    
-	            	pattern = Pattern.compile("([\\/\\+\\*\\-\\^]|sqrt)");
-	            	matcher = pattern.matcher(userText);
-	            	if(matcher.find()) {
-	            		operator = matcher.group(0);
+	        	   
 	            	
-		            	switch (operator) {
-		    	    		case "+":
-		    	    			addition();
-		    	    			break;
-		    	    		case "-":
-		    	    			substraction();
-		    	    			break;
-		    	    		case "/":
-		    	    			divide();
-		    	    			break;
-		    	    		case "*":
-		    	    			multiply();
-		    	    			break;
-		    	    		case "^":
-		    	    			square();
-		    	    			break;
-		    	    		case "sqrt":
-		    	    			squareOut();
-		    	    			break;
-				        		
-				        	default:
-				        		break;
-			        	}	
-	            	}
+	            	switch (operator) {
+	    	    		case "+":
+	    	    			addition();
+	    	    			break;
+	    	    		case "-":
+	    	    			substraction();
+	    	    			break;
+	    	    		case "/":
+	    	    			divide();
+	    	    			break;
+	    	    		case "*":
+	    	    			multiply();
+	    	    			break;
+	    	    		case "^":
+	    	    			square();
+	    	    			break;
+	    	    		case "sqrt":
+	    	    			squareOut();
+	    	    			break;
+			        		
+			        	default:
+			        		break;
+		        	}	
+	            	
 	            	
 	        	}
 	        }else if(userText.matches("^(quit|QUIT|MEMO|memo|HIST|hist)$")) {
@@ -254,7 +264,16 @@ public class Application {
 	 * @author Mathieu K
 	 */
 	public void square() {
+		Square sqr;
 		
+		if(nbr1ToOperate == 0) {
+			sqr = new Square(commandManager.getValueFromPreviousCommand());	
+		}else {
+			sqr = new Square(nbr1ToOperate);
+		}
+		
+		commandManager.doCommand(sqr, nbr2ToOperate);
+		System.out.println(sqr.toString());
 	}
 	
 	/**
@@ -262,6 +281,22 @@ public class Application {
 	 * @author Mathieu K
 	 */
 	public void squareOut() {
+		SquareOut sqrOut;
+		double numberToOperate;
+		
+		if(nbr2ToOperate == 0 && nbr1ToOperate == 0 || (nbr2ToOperate != 0 && nbr1ToOperate != 0)) {
+			System.out.println("Format Racine carré invalide");
+		}else {
+			if(nbr2ToOperate != 0 && nbr1ToOperate == 0 || (nbr2ToOperate == 0 && nbr1ToOperate != 0)) {
+				sqrOut = new SquareOut();	
+			
+				commandManager.doCommand(sqrOut, nbr2ToOperate);
+				System.out.println(sqrOut.toString());
+			}
+		}
+		
+		
+			
 		
 	}
 	
@@ -284,6 +319,10 @@ public class Application {
 				+ "\n - - Soustraction"
 				+ "\n * - Multiplication"
 				+ "\n / - Division"
+				+ "\n % - Modulo"
+				+ "\n ^ - Puissance"
+				+ "\n sqrt - Racine carré => Si un nombre en mémoire utiliser sqrt | Si nombre spécifique => "
+				+ "sqrt[nombre] (sans les [])"
 				+ "\n HIST - Historique des Calculs"
 				+ "\n MEMO - Valeur enregistrée"
 				+ "\n QUIT - Quitter ");
