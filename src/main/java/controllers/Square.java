@@ -37,7 +37,7 @@ public class Square implements Command{
 
 	@Override
     public double redo(final double sqrValue) {
-		double currentValue = this.value;
+		final double currentValue = this.value;
 		this.displayedValue = currentValue;
 		this.sqrValue = sqrValue;
 		for (int i = 0; i < sqrValue - 1; i++) {

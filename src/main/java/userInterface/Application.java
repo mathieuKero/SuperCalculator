@@ -284,10 +284,10 @@ public class Application {
 		SquareOut sqrOut;
 		double numberToOperate;
 		
-		if(nbr2ToOperate == 0 && nbr1ToOperate == 0 || (nbr2ToOperate != 0 && nbr1ToOperate != 0)) {
+		if(nbr2ToOperate == 0 && nbr1ToOperate == 0 || nbr2ToOperate != 0 && nbr1ToOperate != 0) {
 			System.out.println("Format Racine carré invalide");
 		}else {
-			if(nbr2ToOperate != 0 && nbr1ToOperate == 0 || (nbr2ToOperate == 0 && nbr1ToOperate != 0)) {
+			if(nbr2ToOperate != 0 && nbr1ToOperate == 0 || nbr2ToOperate == 0 && nbr1ToOperate != 0) {
 				sqrOut = new SquareOut();	
 			
 				commandManager.doCommand(sqrOut, nbr2ToOperate);
