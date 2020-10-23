@@ -15,7 +15,7 @@ plugins {
     id 'checkstyle'
     id "com.github.spotbugs" version "4.5.1"
     id 'de.aaschmid.cpd' version '3.1'
-    
+
 }
 
 dependencies {
@@ -43,8 +43,16 @@ test {
     }
 }
 
+task archiveDoc(type: Zip) {
+    from '/doc'
+    include '*'
+    include '*/*'
+    archiveName '/doc.zip'
+}
+
 checkstyle {
     ignoreFailures = true
+    checkstyleTest.enabled = false
 }
 
 jacoco {
@@ -103,6 +111,10 @@ pmd {
 spotbugs {
     ignoreFailures = true
     showProgress = false
+}
+
+spotbugsTest {
+    enabled = false
 }
 
 cpd {

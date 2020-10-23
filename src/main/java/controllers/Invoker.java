@@ -42,4 +42,16 @@ public class Invoker {
 	public Command getPreviousCommand() {
 		return this.listCommands.get(this.listCommands.size() - 1);
 	}
+	
+	/**
+	 * Check if history is null or not
+	 * @return
+	 */
+	public Boolean checkHistoryNotNull() {
+		return listCommands.size() == 0;
+	}
+	
+	public double getValueFromPreviousCommand() {
+		return getPreviousCommand().getValue();
+	}
 }
