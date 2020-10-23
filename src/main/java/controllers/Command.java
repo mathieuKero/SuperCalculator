@@ -1,10 +1,10 @@
 package controllers;
 
 public interface Command {
-
-	void calculate();
 	
-	void revert();
+	double redo(final double value);
 	
 	String toString();
+	
+	double getValue();
 }

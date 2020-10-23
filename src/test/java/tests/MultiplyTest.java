@@ -27,7 +27,7 @@ public class MultiplyTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		multi = new Multiply(10, 5);
+		multi = new Multiply(10);
 	}
 
 	/**
@@ -43,8 +43,8 @@ public class MultiplyTest {
 	 */
 	@Test
 	public void MultiplyTwoNumbers() {
-		this.multi.calculate();
-		Assert.assertEquals(50, multi.getResult(), 0.0001);
+		this.multi.redo(5);
+		Assert.assertEquals(50, multi.getValue(), 0.0001);
 	}
 
 } 	
