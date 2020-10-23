@@ -13,7 +13,6 @@ public class SquareOut implements Command{
     
     /**
      * Default Constructor.
-     * @param doubleNumber the current value.
      */
     public SquareOut() { /* Empty constructor */ }
     
