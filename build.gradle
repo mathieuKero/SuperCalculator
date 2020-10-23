@@ -52,6 +52,7 @@ task archiveDoc(type: Zip) {
 
 checkstyle {
     ignoreFailures = true
+    checkstyleTest.enabled = false
 }
 
 jacoco {
