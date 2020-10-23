@@ -15,7 +15,7 @@ public class Substraction implements Command{
     
     /**
      * Default Constructor.
-     * @param a the current value.
+     * @param doubleNumber the current value.
      */
     public Substraction(final double doubleNumber) {
         this.value = doubleNumber;

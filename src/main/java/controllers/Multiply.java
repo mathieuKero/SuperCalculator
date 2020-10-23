@@ -15,8 +15,8 @@ public class Multiply implements Command{
     
     /**
      * Default Constructor.
-     * @param a the current value.
-     */
+     * @param doubleNumber the current value.
+     */	
     public Multiply(final double doubleNumber) {
         this.value = doubleNumber;
     }
@@ -29,12 +29,12 @@ public class Multiply implements Command{
    	}
 
    	@Override
-       public double redo(final double addValue) {
-           this.mulValue = addValue;
+   public double redo(final double addValue) {
+       this.mulValue = addValue;
 
-           this.value *= this.mulValue;
-           return this.value;
-       }
+       this.value *= this.mulValue;
+       return this.value;
+   }
    	
    	@Override
    	public String toString() {

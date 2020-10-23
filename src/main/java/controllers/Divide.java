@@ -15,7 +15,7 @@ public class Divide implements Command{
     
     /**
      * Default Constructor.
-     * @param a the current value.
+     * @param doubleNumber the current value.
      */
     public Divide(final double doubleNumber) {
         this.value = doubleNumber;

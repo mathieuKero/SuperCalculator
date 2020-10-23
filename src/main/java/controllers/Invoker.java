@@ -24,6 +24,7 @@ public class Invoker {
 	/**
 	 * Call the command method for all the inherited classes.
 	 * @param command command that will be managed
+	 * @param value command that will be managed
 	 */
 	public void doCommand(final Command command, double value) {
 		command.redo(value);
