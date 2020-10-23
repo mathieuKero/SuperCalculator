@@ -1,8 +1,8 @@
-package userInterface;
-
+package userinterface;
 import java.io.Console;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.*;
 
@@ -13,22 +13,52 @@ import controllers.Invoker;
 import controllers.Multiply;
 import controllers.Substraction;
 
+/**
+ * Classe Application, Contient l'ensemble des actions utilisateur 
+ * et permet d'appeler les différentes méthodes de calcul
+ * @author MathKer
+ */
 public class Application {
 
+	/**
+	 * Local variable that define the scanner to get the user input
+	 */
 	public static Scanner scanner;
-	public static String stringNumber1;
-	public static String stringNumber2;
+	
+	/**
+	 * New instance of the Invoker that rule the several commands
+	 */
 	public static Invoker commandManager;
 	
-	private String operator = "";
-	private double firstNumber = 0;
-	private double secondNumber = 0;
-	private Object object;
+	/**
+	 * Operator for the calculator => + - / * [...]
+	 */
+	private transient String operator = "";
 	
-    private Pattern pattern;
-    private Matcher matcher;
+	/**
+	 * First number in the operation, if = 0 then the number is ignored
+	 */
+	private transient double nbr1ToOperate = 0d;
+	
+	/**
+	 * Second number in the operation
+	 */
+	private transient double nbr2ToOperate = 0d;
+	
+	/**
+	 * Standard regex pattern 
+	 */
+    private transient Pattern pattern;
     
-    private double memo;
+    /**
+     * Standard regex matchers
+     */
+    private transient Matcher matcher;
+    
+    /**
+     * Double that is stored in order to be used everywhere for the user
+     */
+    private transient double memo;
 		
 	/**
 	 * Default Constructor
@@ -39,52 +69,45 @@ public class Application {
 	 * Main Methods which launch the applications
 	 * @param args Array of String
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		scanner = new Scanner(System.in);
 		commandManager = new Invoker();
-		Application app = new Application();
-		app.MainMessage();
+		final Application app = new Application();
+		app.mainMessage();
 	}
 
 	
 	/**
-	 * Method which launch the Addition / Substraction / Multiply / Divide, depending of the user input
+	 * Method which launch the Addition / Substraction / Multiply / Divide, 
+	 * depending of the user input
 	 * @author Mathieu K
 	 */
-	public void MainMessage() { 
+	public void mainMessage() { 
 	
 		boolean continueTreatment = true;
 		
 		do{
-			System.out.println("Calculatrice, Liste des actions possibles :"
-					+ "\n + - Addition"
-					+ "\n - - Soustraction"
-					+ "\n * - Multiplication"
-					+ "\n / - Division"
-					+ "\n HIST - Historique des Calculs"
-					+ "\n MEMO - Valeur enregistrée"
-					+ "\n QUIT - Quitter ");
+			displayMenu();
 			
 			Boolean toProcess = true;
-			String userText = scanner.nextLine();
+			final String userText = scanner.nextLine();
 	        if(userText.matches("^(\\d*|MEMO|memo)([\\/\\+\\*\\-\\^]|sqrt)(\\d*|MEMO|memo)$")) {
 	        	        	
 	        	pattern = Pattern.compile("^(\\d+|MEMO|memo)");
 	        	matcher = pattern.matcher(userText);
 	        	if(matcher.find()) {
-	        		
-	        		String tmp = matcher.group(0);
+
 	        		if(matcher.group(0).equals("MEMO") || matcher.group(0).equals("memo")) {
-		        		firstNumber = memo;
+		        		nbr1ToOperate = memo;
 	        		}else {
-	        			firstNumber = Double.parseDouble(matcher.group(0));
+	        			nbr1ToOperate = Double.parseDouble(matcher.group(0));
 	        		}
 	        	}else {
-	        		if(commandManager.getHitsoric().size() != 0) {
-	        			firstNumber = 0;
-	        		}else {
+	        		if(commandManager.checkHistoryNotNull()) {
 	        			System.out.println("Vous n'avez pas d'historique de calcul");
 	        			toProcess = false;
+	        		}else {
+	        			nbr1ToOperate = 0;
 	        		}
 	        	}
 	        	
@@ -94,9 +117,9 @@ public class Application {
 	            	matcher = pattern.matcher(userText);
 	        	    if(matcher.find()) {
 	        	    	if(matcher.group(0).equals("MEMO") || matcher.group(0).equals("memo")) {
-		        			secondNumber = memo;
+		        			nbr2ToOperate = memo;
 		        		}else {
-			        	    secondNumber = Double.parseDouble(matcher.group(0));
+			        	    nbr2ToOperate = Double.parseDouble(matcher.group(0));
 		        		}
 		        	}
 	        	    
@@ -132,18 +155,19 @@ public class Application {
 	            	
 	        	}
 	        }else if(userText.matches("^(quit|QUIT|MEMO|memo|HIST|hist)$")) {
-	        	switch(userText.toUpperCase()) {
+	        	switch(userText.toUpperCase(Locale.US)) {
 		        	case "QUIT":
 		        		continueTreatment = false;
 		        		break;
 		        	case "MEMO":
 		        		System.out.println("Veuillez rentrer une valeur pour la variable temporaire :");
-		    			String tmpMemo = scanner.nextLine();
+		    			final String tmpMemo = scanner.nextLine();
 		    			try {
 		        			memo = Double.parseDouble(tmpMemo);
-						} catch (Exception e) {
+		    			} catch(NumberFormatException ex) {
 							System.out.println("Merci de renseigner une valeur décimale");
-						}
+						
+		    			}
 		        		break;
 		        	case "HIST":
 		        		displayHistoric();
@@ -159,15 +183,15 @@ public class Application {
 	 */
 	public void addition() {
 		
-		Addition add = null;
+		Addition add;
 		
-		if(firstNumber != 0) {
-			add = new Addition(firstNumber);
+		if(nbr1ToOperate == 0) {
+			add = new Addition(commandManager.getValueFromPreviousCommand());	
 		}else {
-			add = new Addition(commandManager.getPreviousCommand().getValue());	
+			add = new Addition(nbr1ToOperate);
 		}
 		
-		commandManager.doCommand(add, secondNumber);
+		commandManager.doCommand(add, nbr2ToOperate);
 		System.out.println(add.toString());
 	}
 	
@@ -177,15 +201,15 @@ public class Application {
 	 */
 	public void substraction() {
 		
-		Substraction sub = null;
+		Substraction sub;
 		
-		if(firstNumber != 0) {
-			sub = new Substraction(firstNumber);
+		if(nbr1ToOperate == 0) {
+			sub = new Substraction(commandManager.getValueFromPreviousCommand());	
 		}else {
-			sub = new Substraction(commandManager.getPreviousCommand().getValue());	
+			sub = new Substraction(nbr1ToOperate);
 		}
 		
-		commandManager.doCommand(sub, secondNumber);
+		commandManager.doCommand(sub, nbr2ToOperate);
 		System.out.println(sub.toString());
 	}
 	
@@ -195,15 +219,15 @@ public class Application {
 	 */
 	public void multiply() {
 		
-		Multiply mul = null;
+		Multiply mul;
 		
-		if(firstNumber != 0) {
-			mul = new Multiply(firstNumber);
+		if(nbr1ToOperate == 0) {
+			mul = new Multiply(commandManager.getValueFromPreviousCommand());	
 		}else {
-			mul = new Multiply(commandManager.getPreviousCommand().getValue());	
+			mul = new Multiply(nbr1ToOperate);
 		}
 		
-		commandManager.doCommand(mul, secondNumber);
+		commandManager.doCommand(mul, nbr2ToOperate);
 		System.out.println(mul.toString());
 	}
 	
@@ -213,15 +237,15 @@ public class Application {
 	 */
 	public void divide() {
 		
-		Divide div = null;
+		Divide div;
 		
-		if(firstNumber != 0) {
-			div = new Divide(firstNumber);
+		if(nbr1ToOperate == 0) {
+			div = new Divide(commandManager.getValueFromPreviousCommand());	
 		}else {
-			div = new Divide(commandManager.getPreviousCommand().getValue());	
+			div = new Divide(nbr1ToOperate);
 		}
 		
-		commandManager.doCommand(div, secondNumber);
+		commandManager.doCommand(div, nbr2ToOperate);
 		System.out.println(div.toString());
 	}
 	
@@ -241,10 +265,27 @@ public class Application {
 		
 	}
 	
+	/**
+	 * Display the current historic
+	 */
 	public void displayHistoric() {
-		ArrayList<Command> listCommand = commandManager.getHitsoric();
-		for (Command command : listCommand) {
+		final 	ArrayList<Command> listCommand = commandManager.getHitsoric();
+		for (final Command command : listCommand) {
 			System.out.println(command.toString());
 		}
+	}
+	
+	/**
+	 * Display the menue
+	 */
+	public void displayMenu() {
+		System.out.println("Calculatrice, Liste des actions possibles :"
+				+ "\n + - Addition"
+				+ "\n - - Soustraction"
+				+ "\n * - Multiplication"
+				+ "\n / - Division"
+				+ "\n HIST - Historique des Calculs"
+				+ "\n MEMO - Valeur enregistrée"
+				+ "\n QUIT - Quitter ");
 	}
 }
