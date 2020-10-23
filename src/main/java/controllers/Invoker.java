@@ -45,7 +45,7 @@ public class Invoker {
 	
 	/**
 	 * Check if history is null or not
-	 * @return
+	 * @return true or false
 	 */
 	public Boolean checkHistoryNotNull() {
 		return listCommands.size() == 0;
