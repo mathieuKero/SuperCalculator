@@ -112,6 +112,10 @@ spotbugs {
     showProgress = false
 }
 
+spotbugsTest {
+    enabled = false
+}
+
 cpd {
     ignoreFailures = true
     minimumTokenCount = 10
