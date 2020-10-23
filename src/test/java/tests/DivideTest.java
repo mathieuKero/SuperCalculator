@@ -43,16 +43,16 @@ public class DivideTest {
 	 */
 	@Test
 	public void DivideTwoNumbers() {
-		div = new Divide(12, 3);
-		this.div.calculate();
-		Assert.assertEquals(4, div.getResult(), 0.0001);
+		div = new Divide(12);
+		this.div.redo(3);
+		Assert.assertEquals(4, div.getValue(), 0.0001);
 	}
 	
 	@Test
 	public void DivideTwoNumbersWithZero() {
-		div = new Divide(12, 0);
-		this.div.calculate();
-		Assert.assertEquals(0, div.getResult(), 0.0001);
+		div = new Divide(12);
+		this.div.redo(0);
+		Assert.assertEquals(12, div.getValue(), 0.0001);
 	}
 
 }

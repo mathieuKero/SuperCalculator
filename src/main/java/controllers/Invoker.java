@@ -24,9 +24,10 @@ public class Invoker {
 	/**
 	 * Call the command method for all the inherited classes.
 	 * @param command command that will be managed
+	 * @param value command that will be managed
 	 */
-	public void doCommand(final Command command) {
-		command.calculate();
+	public void doCommand(final Command command, double value) {
+		command.redo(value);
 		listCommands.add(command);
 	}
 
@@ -34,7 +35,11 @@ public class Invoker {
 	 * Return an instance of historic
 	 * @return list of Commands
 	 */
-	public ArrayList<Command> getHitsoric(){
+	public ArrayList<Command> getHitsoric() {
 		return this.listCommands;
+	}
+
+	public Command getPreviousCommand() {
+		return this.listCommands.get(this.listCommands.size() - 1);
 	}
 }

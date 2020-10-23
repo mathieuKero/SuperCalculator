@@ -27,7 +27,7 @@ public class AdditionTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		add = new Addition(5.5, 5.5);
+		add = new Addition(5.5);
 	}
 	
 	/**
@@ -43,8 +43,8 @@ public class AdditionTest {
 	 */
 	@Test
 	public void AdditionTwoNumbers() {
-		this.add.calculate();
-		Assert.assertEquals(11, add.getResult(), 0.0001);
+		this.add.redo(5.5);
+		Assert.assertEquals(11, add.getValue(), 0.0001);
 	}
 
 }

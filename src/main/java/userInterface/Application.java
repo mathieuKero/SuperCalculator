@@ -4,6 +4,7 @@ import java.io.Console;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.*;
 
 import controllers.Addition;
 import controllers.Command;
@@ -18,77 +19,139 @@ public class Application {
 	public static String stringNumber1;
 	public static String stringNumber2;
 	public static Invoker commandManager;
-
+	
+	private String operator = "";
+	private double firstNumber = 0;
+	private double secondNumber = 0;
+	private Object object;
+	
+    private Pattern pattern;
+    private Matcher matcher;
+    
+    private double memo;
+		
 	/**
 	 * Default Constructor
 	 */
 	public Application() { /* Empty constructor */ }
+	
 	/**
 	 * Main Methods which launch the applications
 	 * @param args Array of String
 	 */
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
+		scanner = new Scanner(System.in);
 		commandManager = new Invoker();
 		Application app = new Application();
 		app.MainMessage();
 	}
+
 	
 	/**
 	 * Method which launch the Addition / Substraction / Multiply / Divide, depending of the user input
 	 * @author Mathieu K
 	 */
-	public void MainMessage() {
+	public void MainMessage() { 
+	
 		boolean continueTreatment = true;
 		
 		do{
+			System.out.println("Calculatrice, Liste des actions possibles :"
+					+ "\n + - Addition"
+					+ "\n - - Soustraction"
+					+ "\n * - Multiplication"
+					+ "\n / - Division"
+					+ "\n HIST - Historique des Calculs"
+					+ "\n MEMO - Valeur enregistrée"
+					+ "\n QUIT - Quitter ");
 			
-			System.out.println("Calculatrice, sï¿½lectionnez votre action :"
-					+ "\n 1. Addition"
-					+ "\n 2. Soustraction"
-					+ "\n 3. Multiplication"
-					+ "\n 4. Division"
-					+ "\n 5. Historique des Calculs"
-					+ "\n 6. Quitter ");
-
-			scanner = new Scanner(System.in);
-	    	String userChoice = scanner.nextLine();
-	    	
-		    try {
-		    	int userChoiceInt = Integer.parseInt(userChoice);
-		        
-		        switch(userChoiceInt) {
-		        	case 1:
-				        addition();
-		        		break;
-		        		
-					case 2:			        
-				        substraction();
-		        		break;
-		        		
-					case 3:		    
-					    multiply();
-						break;
-						
-					case 4:
-					    divide();
-						break;
-						        	
-					case 5 :
-		        		displayHistoric();
-		        		break; 
-		        		
-					case 6 :
+			Boolean toProcess = true;
+			String userText = scanner.nextLine();
+	        if(userText.matches("^(\\d*|MEMO|memo)([\\/\\+\\*\\-\\^]|sqrt)(\\d*|MEMO|memo)$")) {
+	        	        	
+	        	pattern = Pattern.compile("^(\\d+|MEMO|memo)");
+	        	matcher = pattern.matcher(userText);
+	        	if(matcher.find()) {
+	        		
+	        		String tmp = matcher.group(0);
+	        		if(matcher.group(0).equals("MEMO") || matcher.group(0).equals("memo")) {
+		        		firstNumber = memo;
+	        		}else {
+	        			firstNumber = Double.parseDouble(matcher.group(0));
+	        		}
+	        	}else {
+	        		if(commandManager.getHitsoric().size() != 0) {
+	        			firstNumber = 0;
+	        		}else {
+	        			System.out.println("Vous n'avez pas d'historique de calcul");
+	        			toProcess = false;
+	        		}
+	        	}
+	        	
+	        	if(toProcess) {
+	
+	            	pattern = Pattern.compile("(\\d*|MEMO|memo)$");
+	            	matcher = pattern.matcher(userText);
+	        	    if(matcher.find()) {
+	        	    	if(matcher.group(0).equals("MEMO") || matcher.group(0).equals("memo")) {
+		        			secondNumber = memo;
+		        		}else {
+			        	    secondNumber = Double.parseDouble(matcher.group(0));
+		        		}
+		        	}
+	        	    
+	            	pattern = Pattern.compile("([\\/\\+\\*\\-\\^]|sqrt)");
+	            	matcher = pattern.matcher(userText);
+	            	if(matcher.find()) {
+	            		operator = matcher.group(0);
+	            	
+		            	switch (operator) {
+		    	    		case "+":
+		    	    			addition();
+		    	    			break;
+		    	    		case "-":
+		    	    			substraction();
+		    	    			break;
+		    	    		case "/":
+		    	    			divide();
+		    	    			break;
+		    	    		case "*":
+		    	    			multiply();
+		    	    			break;
+		    	    		case "^":
+		    	    			square();
+		    	    			break;
+		    	    		case "sqrt":
+		    	    			squareOut();
+		    	    			break;
+				        		
+				        	default:
+				        		break;
+			        	}	
+	            	}
+	            	
+	        	}
+	        }else if(userText.matches("^(quit|QUIT|MEMO|memo|HIST|hist)$")) {
+	        	switch(userText.toUpperCase()) {
+		        	case "QUIT":
 		        		continueTreatment = false;
 		        		break;
-		        		
-		        	default:
+		        	case "MEMO":
+		        		System.out.println("Veuillez rentrer une valeur pour la variable temporaire :");
+		    			String tmpMemo = scanner.nextLine();
+		    			try {
+		        			memo = Double.parseDouble(tmpMemo);
+						} catch (Exception e) {
+							System.out.println("Merci de renseigner une valeur décimale");
+						}
 		        		break;
-		        }
-		    } catch (NumberFormatException nfe) {}
-		    
+		        	case "HIST":
+		        		displayHistoric();
+		        		break;
+	        	}
+	        }
 		}while(continueTreatment);
 	}
-
 	
 	/**
 	 * Method which add two numbers and print the result to the user 
@@ -96,21 +159,16 @@ public class Application {
 	 */
 	public void addition() {
 		
-    	Double doubleNumber1 = null;
-    	Double doubleNumber2 = null;
-    	
-    	displayCalculMessage();
-    	
-    	try {
-    		doubleNumber1 = Double.parseDouble(stringNumber1);
-    		doubleNumber2 = Double.parseDouble(stringNumber2);
-    		
-        	Addition add = new Addition(doubleNumber1, doubleNumber2);
-        	commandManager.doCommand(add);
-        	System.out.println(add.toString());
-	    } catch (NumberFormatException nfe) {
-	    	System.out.println("Merci de renseigner des nombres valides");
-	    }
+		Addition add = null;
+		
+		if(firstNumber != 0) {
+			add = new Addition(firstNumber);
+		}else {
+			add = new Addition(commandManager.getPreviousCommand().getValue());	
+		}
+		
+		commandManager.doCommand(add, secondNumber);
+		System.out.println(add.toString());
 	}
 	
 	/**
@@ -119,21 +177,16 @@ public class Application {
 	 */
 	public void substraction() {
 		
-    	Double doubleNumber1 = null;
-    	Double doubleNumber2 = null;
-    	
-    	displayCalculMessage();
-    	
-    	try {
-    		doubleNumber1 = Double.parseDouble(stringNumber1);
-    		doubleNumber2 = Double.parseDouble(stringNumber2);
-    		
-        	Substraction sub = new Substraction(doubleNumber1, doubleNumber2);
-        	commandManager.doCommand(sub);
-        	System.out.println(sub.toString());
-	    } catch (NumberFormatException nfe) {
-	    	System.out.println("Merci de renseigner des nombres valides");
-	    }
+		Substraction sub = null;
+		
+		if(firstNumber != 0) {
+			sub = new Substraction(firstNumber);
+		}else {
+			sub = new Substraction(commandManager.getPreviousCommand().getValue());	
+		}
+		
+		commandManager.doCommand(sub, secondNumber);
+		System.out.println(sub.toString());
 	}
 	
 	/**
@@ -142,21 +195,16 @@ public class Application {
 	 */
 	public void multiply() {
 		
-    	Double doubleNumber1 = null;
-    	Double doubleNumber2 = null;
-    	
-    	displayCalculMessage();
-    	
-    	try {
-    		doubleNumber1 = Double.parseDouble(stringNumber1);
-    		doubleNumber2 = Double.parseDouble(stringNumber2);
-    		
-    		Multiply multi = new Multiply(doubleNumber1, doubleNumber2);
-        	commandManager.doCommand(multi);
-        	System.out.println(multi.toString());
-	    } catch (NumberFormatException nfe) {
-	    	System.out.println("Merci de renseigner des nombres valides");
-	    }   	
+		Multiply mul = null;
+		
+		if(firstNumber != 0) {
+			mul = new Multiply(firstNumber);
+		}else {
+			mul = new Multiply(commandManager.getPreviousCommand().getValue());	
+		}
+		
+		commandManager.doCommand(mul, secondNumber);
+		System.out.println(mul.toString());
 	}
 	
 	/**
@@ -165,28 +213,32 @@ public class Application {
 	 */
 	public void divide() {
 		
-    	Double doubleNumber1 = null;
-    	Double doubleNumber2 = null;
-    	
-    	displayCalculMessage();
-    	
-    	try {
-    		doubleNumber1 = Double.parseDouble(stringNumber1);
-    		doubleNumber2 = Double.parseDouble(stringNumber2);
-    		
-        	Divide div = new Divide(doubleNumber1, doubleNumber2);
-        	commandManager.doCommand(div);
-        	System.out.println(div.toString());
-	    } catch (NumberFormatException nfe) {
-	    	System.out.println("Merci de renseigner des nombres valides");
-	    }
+		Divide div = null;
+		
+		if(firstNumber != 0) {
+			div = new Divide(firstNumber);
+		}else {
+			div = new Divide(commandManager.getPreviousCommand().getValue());	
+		}
+		
+		commandManager.doCommand(div, secondNumber);
+		System.out.println(div.toString());
 	}
 	
-	public void displayCalculMessage() {
-		System.out.println("1er valeur : ");
-		stringNumber1 = scanner.nextLine();
-		System.out.println("2eme valeur : ");
-		stringNumber2 = scanner.nextLine();
+	/**
+	 * Method witch square the first number depends on the second
+	 * @author Mathieu K
+	 */
+	public void square() {
+		
+	}
+	
+	/**
+	 * Method witch squareOut the number
+	 * @author Mathieu K
+	 */
+	public void squareOut() {
+		
 	}
 	
 	public void displayHistoric() {

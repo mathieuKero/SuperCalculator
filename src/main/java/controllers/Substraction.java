@@ -7,90 +7,38 @@ package controllers;
  */
 public class Substraction implements Command{
 	
-	/**
-	 * First number to substract
-	 */
-	private double nbr1;
-	
-	/**
-	 * Second Number to substract
-	 */
-	private double nbr2;
-	
-	/**
-	 * Result of the calcul
-	 */
-	private double result;
-	
-	/**
-	 * @return the result
-	 */
-	public double getResult() {
-		return result;
-	}
+	/** Current value (to add a other) */
+    private transient double value;
 
-	/**
-	 * @param result the result to set
+    /** Value to add at current */
+    private transient double subValue;
+    
+    /**
+     * Default Constructor.
+     * @param doubleNumber the current value.
+     */
+    public Substraction(final double doubleNumber) {
+        this.value = doubleNumber;
+    }
+    
+    /**
+	 * @return the value
 	 */
-	public void setResult(double result) {
-		this.result = result;
-	}
-	
-	/**
-	 * @return the nbr1
-	 */
-	public double getNbr1() {
-		return nbr1;
-	}
-
-	/**
-	 * @param nbr1 the nbr1 to set
-	 */
-	public void setNbr1(double nbr1) {
-		this.nbr1 = nbr1;
-	}
-
-	/**
-	 * @return the nbr2
-	 */
-	public double getNbr2() {
-		return nbr2;
-	}
-
-	/**
-	 * @param nbr2 the nbr2 to set
-	 */
-	public void setNbr2(double nbr2) {
-		this.nbr2 = nbr2;
-	}
-	
-	/**
-  	 * Create a new instance of Substraction
-	 * @param nbr1 First number to substract
-	 * @param nbr2 Second number to substract
-	 */
-	public Substraction(double nbr1, double nbr2) {
-		super();
-		this.nbr1 = nbr1;
-		this.nbr2 = nbr2;
-	}
-
-	/**
-	 * Substraction Method which subtract two numbers 
-	 */ 
-	@Override
-	public void calculate() {
-		result = nbr1 - nbr2;
+    @Override
+	public double getValue() {
+		return value;
 	}
 
 	@Override
-	public void revert() {
-		// TODO Auto-generated method stub
-		
-	}
+    public double redo(final double addValue) {
+        this.subValue = addValue;
+
+        this.value -= this.subValue;
+        return this.value;
+    }
 	
 	@Override
 	public String toString() {
-		return String.format("%s - %s = %s", nbr1, nbr2, result);
+		return String.format("%s - %s = %s", value - subValue , subValue, value);
 	}
 }

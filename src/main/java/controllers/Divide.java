@@ -7,92 +7,44 @@ package controllers;
  */
 public class Divide implements Command{
 
-	/**
-	 * First number to add
-	 */
-	private double nbr1;
-	
-	/**
-	 * Second number to add
-	 */
-	private double nbr2;
-	
-	/**
-	 * @return the nbr1
-	 */
-	public double getNbr1() {
-		return nbr1;
-	}
+    /** Current value (to add a other) */
+    private transient double value;
 
-	/**
-	 * Result of the calcul
-	 */
-	private double result;
-	
-	/**
-	 * @return the result
-	 */
-	public double getResult() {
-		return result;
-	}
+    /** Value to add at current */
+    private transient double divValue;
+    
+    /**
+     * Default Constructor.
+     * @param doubleNumber the current value.
+     */
+    public Divide(final double doubleNumber) {
+        this.value = doubleNumber;
+    }
 
-	/**
-	 * @param result the result to set
+    
+    /**
+	 * @return the value
 	 */
-	public void setResult(double result) {
-		this.result = result;
-	}
-	
-	/**
-	 * @param nbr1 the nbr1 to set
-	 */
-	public void setNbr1(double nbr1) {
-		this.nbr1 = nbr1;
-	}
-
-	/**
-	 * @return the nbr2
-	 */
-	public double getNbr2() {
-		return nbr2;
-	}
-
-	/**
-	 * @param nbr2 the nbr2 to set
-	 */
-	public void setNbr2(double nbr2) {
-		this.nbr2 = nbr2;
-	}
-	
-	/**
-	 * Create a new instance of Division
-	 * @param nbr1 First number to division
-	 * @param nbr2 Second number to division
-	 */
-	public Divide(double nbr1, double nbr2) {
-		super();
-		this.nbr1 = nbr1;
-		this.nbr2 = nbr2;
-	}
-
-	/**
-	 * Addition Method which division two numbers 
-	 */
-	@Override
-	public void calculate() {
-		result = 0;
-		if(nbr2 != 0) {
-			result = nbr1 / nbr2;
-		}
+    @Override
+	public double getValue() {
+		return value;
 	}
 
 	@Override
-	public void revert() {
-		// TODO Auto-generated method stub
-	}
+    public double redo(final double addValue) {
+        this.divValue = addValue;
+
+        if(this.divValue == 0) {
+        	System.out.println("Impossible de diviser par 0");
+        }else {
+            this.value /= this.divValue;
+        }
+        
+        return this.value;
+    }
 	
 	@Override
 	public String toString() {
-		return String.format("%s / %s = %s", nbr1, nbr2, result);
+		return String.format("%s / %s = %s", value - divValue , divValue, value);
 	}
 }
