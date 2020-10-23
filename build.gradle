@@ -15,7 +15,7 @@ plugins {
     id 'checkstyle'
     id "com.github.spotbugs" version "4.5.1"
     id 'de.aaschmid.cpd' version '3.1'
-    
+
 }
 
 dependencies {
@@ -41,6 +41,13 @@ test {
         port = 6300
         jmx = false
     }
+}
+
+task archiveDoc(type: Zip) {
+    from '/doc'
+    include '*'
+    include '*/*'
+    archiveName '/doc.zip'
 }
 
 checkstyle {
